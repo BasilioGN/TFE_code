@@ -26,7 +26,6 @@ def intro_pads(color, synth_to_use, duration, volume)
   end
 end
 
-
 def play_color_pad(pad_duration, volume, time_between_chords, the_synth)
   use_synth the_synth #assignment of the synth to be used
   play chord(:D3, :major), sustain: pad_duration, amp: volume, release: 0.5
@@ -39,8 +38,6 @@ def play_color_pad(pad_duration, volume, time_between_chords, the_synth)
   sleep time_between_chords
 end
 
-#play_color_pad(2, 2, 2, :dsaw)
-
 def play_dissonant_pad(pad_duration, volume, time_between_chords, the_synth)
   use_synth the_synth #assignment of the synth to be used
   play chord(:D3, :minor), sustain: pad_duration, amp: volume, release: 0.5
@@ -50,15 +47,22 @@ def play_dissonant_pad(pad_duration, volume, time_between_chords, the_synth)
   play chord(:B2, :dim), sustain: pad_duration, amp: volume, release: 0.5
   sleep time_between_chords
   play [:b3, :cs3, :e3], sustain: pad_duration, amp: (volume), release: 0.5
-  #play :cs3, sustain: pad_duration, amp: (volume/3), release: 0.5
-  #play :e3, sustain: pad_duration, amp: (volume/3), release: 0.5
-  #play chord(:C3, :dim), sustain: 0.5, release: 2 , amp: 0.5
   sleep time_between_chords
 end
 
+def play_melody_A # Generates the section A melody.
+  play_pattern_timed [:d3, :d4, :fs3, :gs3, :f3, :b3], [0.5, 1, 2, 0.5], amp: 0.5
+end
+
+def rand_counterpoint ()
+  
+end
+
+
 live_loop :prueba do
-  play_dissonant_pad(2, 0.9, 2, :sine)
+  #play_dissonant_pad(2, 0.9, 2, :sine)
   #play_color_pad(2, 0.5, 2, :sine)
+  #play_melody_A
 end
 
 
