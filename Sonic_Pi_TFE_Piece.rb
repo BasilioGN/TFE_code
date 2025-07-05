@@ -13,7 +13,7 @@
 #################################################################
 
 # Global config
-use_bpm 120 #indicates de bpm that the song will have globally.
+use_bpm 100 #indicates de bpm that the song will have globally.
 
 #--------- Functions declaration ----------
 def intro_pads(color, synth_to_use, duration, volume)
@@ -27,22 +27,39 @@ def intro_pads(color, synth_to_use, duration, volume)
 end
 
 
-def play_color_pad(pad_duration, volume, time_between_chords)
-  use_synth :sine 
-  play chord(:D3, :major), release: 2, amp: 0.5
+def play_color_pad(pad_duration, volume, time_between_chords, the_synth)
+  use_synth the_synth #assignment of the synth to be used
+  play chord(:D3, :major), sustain: pad_duration, amp: volume, release: 0.5
   sleep time_between_chords
-  play chord(:F2, :major), release: 2, amp: 0.5
+  play chord(:F3, :major), sustain: pad_duration, amp: volume, release: 0.5
   sleep time_between_chords
-  play chord(:A2, :major), release: 2, amp: 0.5
+  play chord(:A2, :major), sustain: pad_duration, amp: volume, release: 0.5
   sleep time_between_chords
-  play chord(:C3, :major), release: 2 , amp: 0.5
+  play chord(:C3, :major), sustain: pad_duration, amp: volume, release: 0.5
   sleep time_between_chords
 end
 
-play_color_pad(2, 2, 2)
+#play_color_pad(2, 2, 2, :dsaw)
 
-#def play_dissonant_pad(pad_duration, volume)
-#end
+def play_dissonant_pad(pad_duration, volume, time_between_chords, the_synth)
+  use_synth the_synth #assignment of the synth to be used
+  play chord(:D3, :minor), sustain: pad_duration, amp: volume, release: 0.5
+  sleep time_between_chords
+  play chord(:C3, :dim), sustain: pad_duration, amp: volume, release: 0.5
+  sleep time_between_chords
+  play chord(:B2, :dim), sustain: pad_duration, amp: volume, release: 0.5
+  sleep time_between_chords
+  play [:b3, :cs3, :e3], sustain: pad_duration, amp: (volume), release: 0.5
+  #play :cs3, sustain: pad_duration, amp: (volume/3), release: 0.5
+  #play :e3, sustain: pad_duration, amp: (volume/3), release: 0.5
+  #play chord(:C3, :dim), sustain: 0.5, release: 2 , amp: 0.5
+  sleep time_between_chords
+end
+
+live_loop :prueba do
+  play_dissonant_pad(2, 0.9, 2, :sine)
+  #play_color_pad(2, 0.5, 2, :sine)
+end
 
 
 
