@@ -54,15 +54,18 @@ def play_melody_A # Generates the section A melody.
   play_pattern_timed [:d3, :d4, :fs3, :gs3, :f3, :b3], [0.5, 1, 2, 0.5], amp: 0.5
 end
 
-def rand_counterpoint ()
-  
+def rand_counterpoint
+  play choose(chord(:e3, :minor)), release: 0.2, cutoff: rrand(60, 130)
 end
+
+#faltaría hacer la función que permita generar un contrapunto aleatorio a nivel melódico
 
 
 live_loop :prueba do
   #play_dissonant_pad(2, 0.9, 2, :sine)
   #play_color_pad(2, 0.5, 2, :sine)
   #play_melody_A
+  rand_counterpoint
 end
 
 
