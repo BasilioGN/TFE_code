@@ -35,7 +35,7 @@ def play_color_pad(pad_duration, volume, time_between_chords, the_synth)
   play chord(:A2, :major), sustain: pad_duration, amp: volume, release: 0.5
   sleep time_between_chords
   play chord(:C3, :major), sustain: pad_duration, amp: volume, release: 0.5
-  sleep time_between_chords
+  
 end
 
 def play_dissonant_pad(pad_duration, volume, time_between_chords, the_synth)
@@ -47,28 +47,55 @@ def play_dissonant_pad(pad_duration, volume, time_between_chords, the_synth)
   play chord(:B2, :dim), sustain: pad_duration, amp: volume, release: 0.5
   sleep time_between_chords
   play [:b3, :cs3, :e3], sustain: pad_duration, amp: (volume), release: 0.5
-  sleep time_between_chords
+  
 end
 
-def play_melody_A # Generates the section A melody.
-  play_pattern_timed [:d3, :d4, :fs3, :gs3, :f3, :b3], [0.5, 1, 2, 0.5], amp: 0.5
+def play_melody_A(volume) # Generates the section A melody.
+  play_pattern_timed [:d4, :d5, :fs4, :gs4, :f4, :b4], [0.5, 1, 2, 0.5], amp: volume
 end
 
-def rand_counterpoint
-  play choose(chord(:e3, :minor)), release: 0.2, cutoff: rrand(60, 130)
+def play_melody_B(volume)
+  play_pattern_timed [:d4, :e3, :g3, :f4], [0.5, 1, 2, 0.5],
+    sustain: rrand(0.3, 3), cutoff: rrand(90, 130), amp: volume
+  sleep 1
+  play_pattern_timed [:c4, :a3, :g3, :fs4], [0.5, 1, 1, 2],
+    sustain: rrand(0.3, 3), cutoff: rrand(90, 130), amp: volume
+  #sleep 4
 end
 
-#faltaría hacer la función que permita generar un contrapunto aleatorio a nivel melódico
-
-
-live_loop :prueba do
-  #play_dissonant_pad(2, 0.9, 2, :sine)
-  #play_color_pad(2, 0.5, 2, :sine)
-  #play_melody_A
-  rand_counterpoint
+def rand_counterpoint(volume)
+  play choose(scale(:d3, :aeolian, num_octaves: 3)),
+    release: rrand(0.3, 3), cutoff: rrand(60, 130), amp: volume
+  sleep rrand(0.4, 1)
 end
 
 
+####### MAIN LOOP ##########
+live_loop :main do
+  sleep 2 # Indicates that the phrase duration is 4 bars.
+end
+###########################
 
 #--------- Section A -----------
+live_loop :pads_A do
+  sync :main
+  play_dissonant_pad(2, 0.5, 2, :sine)
+  #play_color_pad(2, 0.5, 2, :sine)
+end
+
+live_loop :counterpoint_A do
+  stop
+  sync :main
+  use_synth :sine
+  rand_counterpoint(0.3)
+end
+
+live_loop :melody_A do
+  
+  sync :main
+  use_synth :winwood_lead
+  play_melody_A(0.2)
+  #play_melody_B(0.5)
+end
+
 
