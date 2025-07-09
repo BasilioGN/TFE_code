@@ -8,7 +8,7 @@
 
 #################################################################
 #
-#Title: if((this + S_P) == 1) {print "I'm an instrument!"}
+# def live_loop synchro do sync :but_asynchronous end
 #
 #################################################################
 
