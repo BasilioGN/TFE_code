@@ -83,7 +83,7 @@ def play_bass_B (duration, counter, volume)
 end
 
 def play_bass_C(duration, volume)
-  play_pattern_timed [:D2, :F2, :A2, :C2], [duration],
+  play_pattern_timed [:d2, :f2, :a2, :c2], [duration],
     amp: volume
 end
 
