@@ -99,17 +99,15 @@ end
 
 def play_melody_Aa(volume)
   progression = [
-    [:D4, :A3, :D4, :E4, :F4, :E4, :D4, :A3],
-    [:C4, :A3, :C4, :D4, :E4, :D4, :C4, :A3],
+    [:d4, :a3, :d4, :e4, :f4, :e4, :d4, :a3],
+    [:c4, :a3, :c4, :d4, :e4, :d4, :c4, :a3],
   ]
   
   2.times do
     progression.each do |notes|
-      print notes
       2.times do
         notes.each do |n|
           play n, amp: volume
-          print n
           sleep 0.25
         end
       end
