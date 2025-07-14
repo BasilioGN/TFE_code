@@ -68,7 +68,7 @@ def play_percussion_B(delay, counter, volume)
 end
 
 def play_bass_B (duration, counter, volume)
-  bass_progression_B = [:D1, :D2, :Gs1, :Fs2]
+  bass_progression_B = [:d1, :d2, :gs1, :fs2]
   index = 0
   
   8.times do
@@ -171,8 +171,8 @@ end
 
 counter_bass = 0
 live_loop :bass_B do
-  stop
-  sync :main
+  #stop
+  #sync :main
   use_synth :hollow
   play_bass_B(0.2, 2, 2)
 end
