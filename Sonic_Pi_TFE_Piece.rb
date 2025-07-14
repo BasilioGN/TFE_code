@@ -59,7 +59,7 @@ def play_rand_counterpoint(volume)
 end
 
 def play_percussion_B(delay, counter, volume)
-  if (counter.remainder(2) != 0)
+  if (counter.remainder(2) != 0) #plays a bass drum only on odd beats 
     sample :bd_gas, amp: volume
     #sleep delay
     #sample :bd_gas, amp: volume
@@ -80,9 +80,6 @@ def play_bass_B (duration, counter, volume)
     counter += 1
     sleep 3
   end
-  
-  #play_pattern_timed [:d2, :d3, :gs2, :fs3], [1, 1, 1, 1],
-  #sustain: rrand(0.3, 3), cutoff: rrand(90, 130), amp: volume
 end
 
 def play_bass_C(duration, volume)
