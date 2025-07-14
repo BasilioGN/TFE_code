@@ -16,14 +16,6 @@
 use_bpm 100 #indicates de bpm that the song will have globally.
 
 #--------- Functions declaration ----------
-def intro_pads(color, synth_to_use, duration, volume)
-  use_synth synth_to_use
-  if color == true
-    play_color_pad(duration, volume)
-  else
-    play_dissonant_pad(duration, volume)
-  end
-end
 
 def play_color_pad(pad_duration, time_between_chords, the_synth, volume)
   use_synth the_synth #assignment of the synth to be used
@@ -107,8 +99,8 @@ def play_bass_C(duration, volume)
 end
 
 def play_hihat(volume)
-  sample :hat_tap, amp: volume
   sleep 0.25
+  sample :drum_cymbal_closed, amp: volume
 end
 
 def play_clap(volume)
@@ -146,8 +138,8 @@ end
 live_loop :pads_A do
   #stop
   sync :main
-  #play_dissonant_pad(2, 2, :sine, 0.5)
-  play_color_pad(2, 2, :piano, 0.5)
+  play_dissonant_pad(2, 2, :sine, 0.5)
+  #play_color_pad(2, 2, :sine, 0.5)
 end
 
 live_loop :counterpoint_A do
@@ -159,11 +151,11 @@ end
 
 live_loop :melody_A do
   stop
-  sync :main
-  use_synth :winwood_lead
-  play_melody_A(0.2)
+  #sync :main
+  use_synth :kalimba
+  play_melody_A(5)
   sleep 2
-  play_melody_B(0.2)
+  play_melody_B(5)
   sleep 2
 end
 
@@ -173,7 +165,7 @@ counter = 0
 
 live_loop :odd_kick_B do
   counter += 1
-  stop
+  #stop
   sync :main
   play_percussion_B(1, counter, 2)
   sample :loop_electric, amp: 0.5
@@ -183,6 +175,7 @@ end
 counter = 0
 
 live_loop :normal_kick do
+  stop
   sample :bd_808, amp: 3
   sleep 1
 end
@@ -198,7 +191,7 @@ end
 #-------- Section C --------
 
 live_loop :bass_C do
-  #stop
+  stop
   #sync :main
   use_synth :hollow
   #play_bass_C(2, 1)
@@ -206,17 +199,17 @@ live_loop :bass_C do
 end
 
 live_loop :hihat do
-  #stop
+  stop
   #sync :main
-  play_hihat(0.2)
+  play_hihat(1)
 end
 
 live_loop :clap do
-  #stop
+  stop
   sync :main
-  play_clap(0.1)
+  play_clap(0.2)
   sleep 1
-  play_clap(0.1)
+  play_clap(0.2)
 end
 
 live_loop :final_melody do
@@ -224,6 +217,15 @@ live_loop :final_melody do
   #use_synth :zawa
   sync :main
   play_melody_Aa(0.5)
-  
 end
+
+
+#def intro_pads(color, synth_to_use, duration, volume)
+#  use_synth synth_to_use
+#  if color == true
+#    play_color_pad(duration, volume)
+#  else
+#    play_dissonant_pad(duration, volume)
+#  end
+#end
 
