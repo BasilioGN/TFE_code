@@ -122,21 +122,21 @@ end
 ###########################
 
 #--------- Section A -----------
-live_loop :pads_A do
+live_loop :pads_A do #Executes the functions responsible for playing the harmonic pads.
   #stop
   sync :main
   play_dissonant_pad(2, 2, :sine, 0.5)
   #play_color_pad(2, 2, :sine, 0.5)
 end
 
-live_loop :counterpoint_A do
+live_loop :counterpoint_A do #Executes the function responsible for reproducing random notes as a counterpoint.
   stop
   sync :main
-  use_synth :sine
+  use_synth :sine #sets the type of synthesizer to be used.
   play_rand_counterpoint(0.3)
 end
 
-live_loop :melody_A do
+live_loop :melody_A do #plays the melody used in section A.
   stop
   #sync :main
   use_synth :kalimba
@@ -150,25 +150,25 @@ end
 #--------- Section B -----------
 counter = 0
 
-live_loop :odd_kick_B do
+live_loop :odd_kick_B do #Executes the function to make sound a bass drum only on the odd beats.
   counter += 1
   stop
   sync :main
   play_percussion_B(1, counter, 2)
-  sample :loop_electric, amp: 0.5
+  #sample :loop_electric, amp: 0.5
   sleep sample_duration :loop_electric
 end
 
 counter = 0
 
-live_loop :normal_kick do
+live_loop :normal_kick do #Plays the kick regularly on each beat.
   stop
   sample :bd_808, amp: 3
   sleep 1
 end
 
 counter_bass = 0
-live_loop :bass_B do
+live_loop :bass_B do #It performs the function for making the bass sound in section B of the piece.
   stop
   #sync :main
   use_synth :hollow
@@ -177,7 +177,7 @@ end
 
 #-------- Section C --------
 
-live_loop :bass_C do
+live_loop :bass_C do #It performs the function for making the bass sound in section C of the piece.
   stop
   #sync :main
   use_synth :hollow
@@ -185,13 +185,13 @@ live_loop :bass_C do
   play_bass_C(2, 1)
 end
 
-live_loop :hihat do
+live_loop :hihat do #Executes the function that plays the hihat sound.
   stop
   #sync :main
   play_hihat(1)
 end
 
-live_loop :clap do
+live_loop :clap do #Executes the function that plays the snap sound.
   stop
   sync :main
   play_clap(0.2)
@@ -199,9 +199,9 @@ live_loop :clap do
   play_clap(0.2)
 end
 
-live_loop :final_melody do
-  stop
+live_loop :final_melody do #performs the function that reproduces the melody that sounds at the climax of the piece.
   #use_synth :zawa
+  stop
   sync :main
   play_melody_Aa(0.5)
 end
