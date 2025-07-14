@@ -117,7 +117,7 @@ end
 
 ####### MAIN LOOP ##########
 live_loop :main do
-  sleep 4 # Indicates that the phrase duration is 4 bars.
+  sleep 4 # Indicates that the loop duration is 4 bars.
 end
 ###########################
 
@@ -130,7 +130,7 @@ live_loop :pads_A do
 end
 
 live_loop :counterpoint_A do
-  #stop
+  stop
   sync :main
   use_synth :sine
   play_rand_counterpoint(0.3)
@@ -152,7 +152,7 @@ counter = 0
 
 live_loop :odd_kick_B do
   counter += 1
-  #stop
+  stop
   sync :main
   play_percussion_B(1, counter, 2)
   sample :loop_electric, amp: 0.5
@@ -169,7 +169,7 @@ end
 
 counter_bass = 0
 live_loop :bass_B do
-  #stop
+  stop
   #sync :main
   use_synth :hollow
   play_bass_B(0.2, 2, 2)
